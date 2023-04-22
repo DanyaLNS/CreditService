@@ -1,0 +1,80 @@
+databaseChangeLog:
+  - changeSet:
+      id: DEV-3
+      author: anikin
+      changes:
+        - createTable:
+            tableName: tariff
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    - primaryKey: true
+                    - nullable: false
+                    - unique: true
+              - column:
+                  name: type
+                  type: text
+                  constraints:
+                    - nullable: false
+                    - unique: true
+              - column:
+                  name: interest_rate
+                  type: text
+                  constraints:
+                    - nullable: false
+
+        - createTable:
+            tableName: loan_order
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    - primaryKey: true
+                    - nullable: false
+              - column:
+                  name: order_id
+                  type: text
+                  constraints:
+                    - nullable: false
+                    - unique: true
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    - nullable: false
+              - column:
+                  name: tariff_id
+                  type: bigint
+                  constraints:
+                    - nullable: false
+                    -  foreignKeyName: fk_tariff
+                    -  references: tariff(id)
+              - column:
+                  name: credit_rating
+                  type: double precision
+                  constraints:
+                    - nullable: false
+              - column:
+                  name: status
+                  type: text
+                  constraints:
+                    - nullable: false
+              - column:
+                  name: time_insert
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    - nullable: false
+              - column:
+                  name: time_update
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    - nullable: false
+
+
