@@ -1,6 +1,7 @@
 package mts.fintech.creditservice.repository;
 
 import mts.fintech.creditservice.entity.Tariff;
+import mts.fintech.creditservice.exceptions.TariffNotFoundException;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public interface TariffRepository {
 
     int update(Tariff tariff);
 
-    Tariff findById(Long id);
+    Tariff findById(Long id) throws TariffNotFoundException;
 
     List<Tariff> findAll();
 

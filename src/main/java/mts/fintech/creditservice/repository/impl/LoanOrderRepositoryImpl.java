@@ -1,6 +1,7 @@
 package mts.fintech.creditservice.repository.impl;
 
 import mts.fintech.creditservice.entity.LoanOrder;
+import mts.fintech.creditservice.exceptions.LoanOrderNotFoundByUserAndTariffException;
 import mts.fintech.creditservice.repository.LoanOrderRepository;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -44,6 +45,18 @@ public class LoanOrderRepositoryImpl implements LoanOrderRepository {
                     BeanPropertyRowMapper.newInstance(LoanOrder.class), id);
         } catch (IncorrectResultSizeDataAccessException ex) {
             throw ex;
+        }
+    }
+
+    @Override
+    public LoanOrder findByUserIdAndTariffId(Long userId, Long tariffId) throws LoanOrderNotFoundByUserAndTariffException {
+        try {
+            return jdbcTemplate.queryForObject(
+                    "SELECT * FROM loan_order WHERE user_id=? AND tariff_id=?",
+                    BeanPropertyRowMapper.newInstance(LoanOrder.class),
+                    userId, tariffId);
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            throw new LoanOrderNotFoundByUserAndTariffException();
         }
     }
 

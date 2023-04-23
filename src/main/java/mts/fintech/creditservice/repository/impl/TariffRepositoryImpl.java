@@ -1,6 +1,7 @@
 package mts.fintech.creditservice.repository.impl;
 
 import mts.fintech.creditservice.entity.Tariff;
+import mts.fintech.creditservice.exceptions.TariffNotFoundException;
 import mts.fintech.creditservice.repository.TariffRepository;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -32,13 +33,13 @@ public class TariffRepositoryImpl implements TariffRepository {
     }
 
     @Override
-    public Tariff findById(Long id) {
+    public Tariff findById(Long id) throws TariffNotFoundException {
         try {
             return jdbcTemplate.queryForObject(
                     "SELECT * FROM tariff WHERE id=?",
                     BeanPropertyRowMapper.newInstance(Tariff.class), id);
         } catch (IncorrectResultSizeDataAccessException ex) {
-            throw ex;
+            throw new TariffNotFoundException();
         }
     }
 
