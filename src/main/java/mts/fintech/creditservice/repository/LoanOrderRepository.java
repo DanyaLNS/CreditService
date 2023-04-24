@@ -23,4 +23,5 @@ public interface LoanOrderRepository {
 
     int deleteAll();
 
+    List<LoanOrder> findAllInProgress();
 }

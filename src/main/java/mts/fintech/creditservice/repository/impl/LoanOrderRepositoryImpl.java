@@ -92,6 +92,13 @@ public class LoanOrderRepositoryImpl implements LoanOrderRepository {
     }
 
     @Override
+    public List<LoanOrder> findAllInProgress() {
+        return jdbcTemplate.query(
+                "SELECT * FROM loan_order WHERE status='IN_PROGRESS'",
+                BeanPropertyRowMapper.newInstance(LoanOrder.class));
+    }
+
+    @Override
     public int deleteById(Long id) {
         return jdbcTemplate.update(
                 "DELETE FROM loan_order WHERE id=?", id);

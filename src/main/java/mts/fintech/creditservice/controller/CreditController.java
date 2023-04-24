@@ -58,7 +58,6 @@ public class CreditController {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDto> handleException(Exception ex) {
-        System.out.println(ex.getMessage());
         switch (ex.getMessage()) {
             case "TARIFF_NOT_FOUND" -> {
                 return getError(ErrorType.TARIFF_NOT_FOUND);
