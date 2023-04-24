@@ -1,7 +1,7 @@
 package mts.fintech.creditservice.repository.impl;
 
 import mts.fintech.creditservice.entity.LoanOrder;
-import mts.fintech.creditservice.exceptions.LoanOrderNotFoundByUserAndTariffException;
+import mts.fintech.creditservice.exceptions.LoanOrderNotFoundException;
 import mts.fintech.creditservice.repository.LoanOrderRepository;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -49,14 +49,38 @@ public class LoanOrderRepositoryImpl implements LoanOrderRepository {
     }
 
     @Override
-    public LoanOrder findByUserIdAndTariffId(Long userId, Long tariffId) throws LoanOrderNotFoundByUserAndTariffException {
+    public LoanOrder findByUserIdAndTariffId(Long userId, Long tariffId) throws LoanOrderNotFoundException {
         try {
             return jdbcTemplate.queryForObject(
                     "SELECT * FROM loan_order WHERE user_id=? AND tariff_id=?",
                     BeanPropertyRowMapper.newInstance(LoanOrder.class),
                     userId, tariffId);
         } catch (IncorrectResultSizeDataAccessException ex) {
-            throw new LoanOrderNotFoundByUserAndTariffException();
+            throw new LoanOrderNotFoundException();
+        }
+    }
+
+    @Override
+    public LoanOrder findByOrderId(String orderId) throws LoanOrderNotFoundException {
+        try {
+            return jdbcTemplate.queryForObject(
+                    "SELECT * FROM loan_order WHERE order_id=?",
+                    BeanPropertyRowMapper.newInstance(LoanOrder.class),
+                    orderId);
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            throw new LoanOrderNotFoundException();
+        }
+    }
+
+    @Override
+    public LoanOrder findByUserIdAndOrderId(long userId, String orderId) throws LoanOrderNotFoundException {
+        try {
+            return jdbcTemplate.queryForObject(
+                    "SELECT * FROM loan_order WHERE user_id=? AND order_id=?",
+                    BeanPropertyRowMapper.newInstance(LoanOrder.class),
+                    userId, orderId);
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            throw new LoanOrderNotFoundException("ORDER_NOT_FOUND");
         }
     }
 

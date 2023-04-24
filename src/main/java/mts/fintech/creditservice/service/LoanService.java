@@ -1,11 +1,10 @@
 package mts.fintech.creditservice.service;
 
+import mts.fintech.creditservice.dto.input.DeleteOrderDto;
 import mts.fintech.creditservice.dto.input.LoanOrderInDto;
 import mts.fintech.creditservice.entity.LoanOrder;
 import mts.fintech.creditservice.entity.Tariff;
-import mts.fintech.creditservice.exceptions.LoanOrderNotFoundByUserAndTariffException;
-import mts.fintech.creditservice.exceptions.LoanOrderProcessingException;
-import mts.fintech.creditservice.exceptions.TariffNotFoundException;
+import mts.fintech.creditservice.exceptions.*;
 import mts.fintech.creditservice.repository.impl.LoanOrderRepositoryImpl;
 import mts.fintech.creditservice.repository.impl.TariffRepositoryImpl;
 import org.springframework.stereotype.Service;
@@ -27,9 +26,10 @@ public class LoanService {
         this.orderRepository = orderRepository;
     }
 
-    public List<Tariff> getAllTariffs(){
+    public List<Tariff> getAllTariffs() {
         return tariffRepository.findAll();
     }
+
     public String createLoanOrder(LoanOrderInDto order) throws TariffNotFoundException, LoanOrderProcessingException {
         try {
             tariffRepository.findById(order.getTariffId());
@@ -37,7 +37,7 @@ public class LoanService {
             return processLoanOrder(order, loanOrder);
         } catch (TariffNotFoundException ex) {
             throw ex;
-        } catch (LoanOrderNotFoundByUserAndTariffException ex) {
+        } catch (LoanOrderNotFoundException ex) {
             return saveOrder(order);
         }
     }
@@ -45,7 +45,6 @@ public class LoanService {
     private String processLoanOrder(LoanOrderInDto order, LoanOrder loanOrder) throws LoanOrderProcessingException {
         switch (loanOrder.getStatus()) {
             case "IN_PROGRESS" -> {
-                System.out.println("in progress ex");
                 throw new LoanOrderProcessingException("LOAN_CONSIDERATION");
             }
             case "APPROVED" -> {
@@ -93,5 +92,25 @@ public class LoanService {
                 String.format("%." + 2 + "f", rating)
                         .replace(",", "."));
         return formalized_rating;
+    }
+
+    public String getOrderStatus(String orderId) throws LoanOrderNotFoundException {
+        try {
+            return orderRepository
+                    .findByOrderId(orderId)
+                    .getStatus();
+        } catch (LoanOrderNotFoundException ex) {
+            throw ex;
+        }
+    }
+
+    public void deleteLoanOrder(DeleteOrderDto deleteOrderDto) throws LoanOrderNotFoundException, OrderImpossibleToDeleteException {
+        LoanOrder loanOrder = orderRepository.findByUserIdAndOrderId(deleteOrderDto.getUserId(), deleteOrderDto.getOrderId());
+        System.out.println(loanOrder.getStatus());
+        if(loanOrder.getStatus().equals("IN_PROGRESS")) {
+            orderRepository.deleteById(loanOrder.getId());
+        } else {
+            throw new OrderImpossibleToDeleteException();
+        }
     }
 }

@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class DeleteOrderDto {
-    private String userId;
+    private long userId;
     private String orderId;
 }
