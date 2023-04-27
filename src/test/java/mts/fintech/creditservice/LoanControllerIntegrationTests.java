@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(LoanController.class)
 @AutoConfigureMockMvc
-public class LoanControllerIntegrationTest {
+public class LoanControllerIntegrationTests {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private MockMvc mockMvc;

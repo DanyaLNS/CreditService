@@ -5,7 +5,6 @@ import mts.fintech.creditservice.dto.input.DeleteOrderDto;
 import mts.fintech.creditservice.dto.input.LoanOrderInDto;
 import mts.fintech.creditservice.entity.LoanOrder;
 import mts.fintech.creditservice.entity.Tariff;
-import mts.fintech.creditservice.enums.ErrorType;
 import mts.fintech.creditservice.exceptions.LoanOrderNotFoundException;
 import mts.fintech.creditservice.exceptions.LoanOrderProcessingException;
 import mts.fintech.creditservice.exceptions.OrderImpossibleToDeleteException;
@@ -68,7 +67,7 @@ public class LoanService {
                 throw new LoanOrderProcessingException("LOAN_ALREADY_APPROVED");
             }
             case REFUSED_STATUS -> {
-                if (dateDiffWithCurrentTime(loanOrder.getTime_update()) < TWO_MINUTES) {
+                if (dateDiffWithCurrentTime(loanOrder.getTimeUpdate()) < TWO_MINUTES) {
                     throw new LoanOrderProcessingException("TRY_LATER");
                 } else {
                     return saveOrder(order);
@@ -90,7 +89,7 @@ public class LoanService {
         log.info("Saving loan order");
         LoanOrder inputOrder = generateOrder(order.getUserId(), order.getTariffId());
         orderRepository.save(inputOrder);
-        return inputOrder.getOrder_id();
+        return inputOrder.getOrderId();
     }
 
     private LoanOrder generateOrder(long user_id, long tariff_id) {
