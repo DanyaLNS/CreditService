@@ -24,7 +24,7 @@ public class LoanOrderRepositoryImpl implements LoanOrderRepository {
     public int save(LoanOrder order) {
         return jdbcTemplate.update(
                 "INSERT INTO loan_order (order_id, user_id, tariff_id, credit_rating, status) VALUES (?,?,?,?,?)",
-                new Object[]{order.getOrder_id(), order.getUser_id(), order.getTariff_id(), order.getCredit_rating(), order.getStatus()}
+                new Object[]{order.getOrderId(), order.getUserId(), order.getTariffId(), order.getCreditRating(), order.getStatus()}
         );
     }
 
@@ -33,7 +33,7 @@ public class LoanOrderRepositoryImpl implements LoanOrderRepository {
         Timestamp timeUpdate = new Timestamp(System.currentTimeMillis());
         return jdbcTemplate.update(
                 "UPDATE loan_order SET order_id=?, user_id=?, tariff_id=?, credit_rating=?, status=?, time_update=? WHERE id=?",
-                new Object[]{order.getOrder_id(), order.getUser_id(), order.getTariff_id(), order.getCredit_rating(), order.getStatus(), timeUpdate, order.getId()}
+                new Object[]{order.getOrderId(), order.getUserId(), order.getTariffId(), order.getCreditRating(), order.getStatus(), timeUpdate, order.getId()}
         );
     }
 

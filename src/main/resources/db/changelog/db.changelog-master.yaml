@@ -52,8 +52,8 @@ databaseChangeLog:
                   type: bigint
                   constraints:
                     - nullable: false
-                    -  foreignKeyName: fk_tariff
-                    -  references: tariff(id)
+                    - foreignKeyName: fk_tariff
+                    - references: tariff(id)
               - column:
                   name: credit_rating
                   type: double precision
@@ -77,4 +77,71 @@ databaseChangeLog:
                   constraints:
                     - nullable: false
 
+  - changeSet:
+      id: INSERT_TARIFFS
+      author: anikin
+      changes:
+        - insert:
+            tableName: tariff
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: type
+                  value: "CONSUMER"
+              - column:
+                  name: interest_rate
+                  value: "13.2%"
 
+        - insert:
+            tableName: tariff
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: type
+                  value: "MORTGAGE"
+              - column:
+                  name: interest_rate
+                  value: "4.2%"
+
+        - insert:
+            tableName: tariff
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: type
+                  value: "STUDENT"
+              - column:
+                  name: interest_rate
+                  value: "7.6%"
+
+        - insert:
+            tableName: tariff
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: type
+                  value: "BUSINESS"
+              - column:
+                  name: interest_rate
+                  value: "9.9%"
+
+        - insert:
+            tableName: tariff
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: type
+                  value: "LAND"
+              - column:
+                  name: interest_rate
+                  value: "3.3%"

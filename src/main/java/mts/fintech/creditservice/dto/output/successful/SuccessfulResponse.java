@@ -1,4 +1,4 @@
 package mts.fintech.creditservice.dto.output.successful;
 
-public interface SuccessfulResponse {
+public abstract class SuccessfulResponse {
 }

@@ -30,25 +30,22 @@ public class LoanController {
     @GetMapping("/getTariffs")
     public ResponseEntity<SuccessfulDto> getAllTariffs() {
         return new ResponseEntity<>(
-                new SuccessfulDto(
-                        new AllTariffsDto(loanService.getAllTariffs())
-                ), HttpStatus.OK
+                new SuccessfulDto(new AllTariffsDto(loanService.getAllTariffs())),
+                HttpStatus.OK
         );
     }
 
     @PostMapping("/order")
     public ResponseEntity<SuccessfulDto> createLoanOrder(@RequestBody LoanOrderInDto order) throws TariffNotFoundException, LoanOrderProcessingException {
         return new ResponseEntity<>(
-                new SuccessfulDto(
-                        new LoanOrderDto(loanService.createLoanOrder(order))),
+                new SuccessfulDto(new LoanOrderDto(loanService.createLoanOrder(order))),
                 HttpStatus.OK);
     }
 
     @GetMapping("/getStatusOrder")
     public ResponseEntity<SuccessfulDto> getStatusOrder(@RequestParam String orderId) throws LoanOrderNotFoundException {
         return new ResponseEntity<>(
-                new SuccessfulDto(
-                        new OrderStatusDto(loanService.getOrderStatus(orderId))),
+                new SuccessfulDto(new OrderStatusDto(loanService.getOrderStatus(orderId))),
                 HttpStatus.OK
         );
     }

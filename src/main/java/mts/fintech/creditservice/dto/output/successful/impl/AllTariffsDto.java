@@ -9,6 +9,6 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class AllTariffsDto implements SuccessfulResponse {
+public class AllTariffsDto extends SuccessfulResponse {
     private List<Tariff> tariffs;
 }

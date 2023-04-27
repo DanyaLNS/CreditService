@@ -6,6 +6,6 @@ import mts.fintech.creditservice.dto.output.successful.SuccessfulResponse;
 
 @Data
 @AllArgsConstructor
-public class LoanOrderDto implements SuccessfulResponse {
+public class LoanOrderDto extends SuccessfulResponse {
     private String orderId;
 }

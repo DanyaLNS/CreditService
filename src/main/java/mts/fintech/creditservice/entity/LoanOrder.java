@@ -9,19 +9,19 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class LoanOrder {
     private long id;
-    private String order_id;
-    private long user_id;
-    private long tariff_id;
-    private double credit_rating;
+    private String orderId;
+    private long userId;
+    private long tariffId;
+    private double creditRating;
     private String status;
-    private Timestamp time_insert;
-    private Timestamp time_update;
+    private Timestamp timeInsert;
+    private Timestamp timeUpdate;
 
-    public LoanOrder(String order_id, long user_id, long tariff_id, double credit_rating, String status) {
-        this.order_id = order_id;
-        this.user_id = user_id;
-        this.tariff_id = tariff_id;
-        this.credit_rating = credit_rating;
+    public LoanOrder(String orderId, long userId, long tariffId, double creditRating, String status) {
+        this.orderId = orderId;
+        this.userId = userId;
+        this.tariffId = tariffId;
+        this.creditRating = creditRating;
         this.status = status;
     }
 }
