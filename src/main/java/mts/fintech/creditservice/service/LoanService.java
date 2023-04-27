@@ -5,6 +5,7 @@ import mts.fintech.creditservice.dto.input.DeleteOrderDto;
 import mts.fintech.creditservice.dto.input.LoanOrderInDto;
 import mts.fintech.creditservice.entity.LoanOrder;
 import mts.fintech.creditservice.entity.Tariff;
+import mts.fintech.creditservice.enums.ErrorType;
 import mts.fintech.creditservice.exceptions.LoanOrderNotFoundException;
 import mts.fintech.creditservice.exceptions.LoanOrderProcessingException;
 import mts.fintech.creditservice.exceptions.OrderImpossibleToDeleteException;
@@ -138,7 +139,7 @@ public class LoanService {
     }
 
     @Scheduled(fixedRate = TWO_MINUTES)
-    public void considerLoanOrder() {
+    private void considerLoanOrder() {
         log.info("Consider loan orders");
         List<LoanOrder> notConsideredOrders = orderRepository.findAllInProgress();
         notConsideredOrders.forEach(order -> {

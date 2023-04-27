@@ -16,7 +16,7 @@ public class ErrorResponseFactory {
 
     private final static String LOAN_CONSIDERATION_CODE = "LOAN_CONSIDERATION";
     private final static String  LOAN_CONSIDERATION_MESSAGE = "Заявка находится на рассмотрении";
-    private final static String LOAN_ALREADY_APPROVED_CODE = "LOAN_ALREADY_APPROVED.";
+    private final static String LOAN_ALREADY_APPROVED_CODE = "LOAN_ALREADY_APPROVED";
     private final static String LOAN_ALREADY_APPROVED_MESSAGE = "Заявка одобрена";
     private final static String TRY_LATER_CODE = "TRY_LATER";
     private final static String TRY_LATER_MESSAGE = "Заявка отклонена, попробуйте позже";

@@ -8,7 +8,10 @@ import mts.fintech.creditservice.dto.output.successful.impl.AllTariffsDto;
 import mts.fintech.creditservice.dto.output.successful.impl.LoanOrderDto;
 import mts.fintech.creditservice.dto.output.successful.impl.OrderStatusDto;
 import mts.fintech.creditservice.enums.ErrorType;
-import mts.fintech.creditservice.exceptions.*;
+import mts.fintech.creditservice.exceptions.LoanOrderNotFoundException;
+import mts.fintech.creditservice.exceptions.LoanOrderProcessingException;
+import mts.fintech.creditservice.exceptions.OrderImpossibleToDeleteException;
+import mts.fintech.creditservice.exceptions.TariffNotFoundException;
 import mts.fintech.creditservice.service.LoanService;
 import mts.fintech.creditservice.utils.ErrorResponseFactory;
 import org.springframework.http.HttpStatus;
@@ -17,10 +20,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/loan-service")
-public class CreditController {
+public class LoanController {
     private final LoanService loanService;
 
-    public CreditController(LoanService loanService) {
+    public LoanController(LoanService loanService) {
         this.loanService = loanService;
     }
 
