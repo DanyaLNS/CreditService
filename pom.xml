@@ -10,13 +10,15 @@
 	</parent>
 	<groupId>mts.fintech</groupId>
 	<artifactId>CreditService</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>release</version>
 	<name>CreditService</name>
 	<description>CreditService</description>
 	<properties>
 		<java.version>20</java.version>
 		<postgresql.version>42.5.4</postgresql.version>
 		<jdbc.version>3.0.6</jdbc.version>
+		<resilience4j.version>1.5.0</resilience4j.version>
+		<spring-cloud.version>2021.0.1</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -47,9 +49,36 @@
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 			<version>${jdbc.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
-
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<build>
 		<plugins>
 			<plugin>
