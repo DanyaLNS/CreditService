@@ -17,7 +17,6 @@
 ```
 * **loan_service/getStatusOrder** - GET - получение статуса заявки с обязательным параметром orderId;
 * **loan_service/deleteOrder** - DELETE - удаление заявки на кредит, телом запрос является json следующего формата: 
-* **loan_service/order** - POST - подача заявки на кредит, телом запроса является json следующего формата:
 ``` json
 {
     "userId": 1,
