@@ -15,7 +15,6 @@
 	<description>CreditService</description>
 	<properties>
 		<java.version>20</java.version>
-		<postgresql.version>42.5.4</postgresql.version>
 		<jdbc.version>3.0.6</jdbc.version>
 		<resilience4j.version>1.5.0</resilience4j.version>
 		<spring-cloud.version>2021.0.1</spring-cloud.version>
@@ -40,9 +39,8 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>${postgresql.version}</version>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

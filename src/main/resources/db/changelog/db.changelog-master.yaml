@@ -16,13 +16,13 @@ databaseChangeLog:
                     - unique: true
               - column:
                   name: type
-                  type: text
+                  type: varchar
                   constraints:
                     - nullable: false
                     - unique: true
               - column:
                   name: interest_rate
-                  type: text
+                  type: varchar
                   constraints:
                     - nullable: false
 
@@ -38,7 +38,7 @@ databaseChangeLog:
                     - nullable: false
               - column:
                   name: order_id
-                  type: text
+                  type: varchar
                   constraints:
                     - nullable: false
                     - unique: true
@@ -61,7 +61,7 @@ databaseChangeLog:
                     - nullable: false
               - column:
                   name: status
-                  type: text
+                  type: varchar
                   constraints:
                     - nullable: false
               - column:

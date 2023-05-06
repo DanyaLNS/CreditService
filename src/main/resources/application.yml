@@ -1,8 +1,11 @@
 spring:
+  liquibase:
+    enabled: true
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/credit_db
-    username: postgres
-    password: "postgres"
-  liquibase: classpath:liquibase/changelog.yml
-
+    url: jdbc:h2:mem:loan_db
+    username: user
+    password: password
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
