@@ -25,3 +25,7 @@
 ```
 ### Функционал был выполнен в соответствии с [техническим заданием](https://drive.google.com/file/d/1zett8xUTBs7ZuF3sFCnykGqPkwLFldb4/view).
 Логирование было реализовано с помощью кастомной конфигурации log4j2. Каждый день создаётся новый файл в директории logs, в который записываются логи.
+
+## Frontend 
+Также для данного проекта была реализована frontend-часть, при разработке использовался язык программирования JavaScript, фреймворк React и UI-kit Material UI
+https://github.com/DanyaLNS/LoanServiceFront
